@@ -183,6 +183,33 @@ function initApp() {
   // Set initial admin authentication state to false on page load for safety
   state.isAdminAuthenticated = false;
 
+  // Validate and normalize state structure to prevent crashes from corrupted local storage
+  if (!state || typeof state !== 'object') {
+    state = JSON.parse(JSON.stringify(INITIAL_STATE));
+  }
+  if (!Array.isArray(state.nominations)) {
+    state.nominations = [];
+  }
+  if (!state.finalists || typeof state.finalists !== 'object') {
+    state.finalists = JSON.parse(JSON.stringify(INITIAL_STATE.finalists));
+  } else {
+    // Ensure all sub-properties are arrays
+    Object.keys(INITIAL_STATE.finalists).forEach(cat => {
+      if (!Array.isArray(state.finalists[cat])) {
+        state.finalists[cat] = [];
+      }
+    });
+  }
+  if (!state.userVotes || typeof state.userVotes !== 'object') {
+    state.userVotes = JSON.parse(JSON.stringify(INITIAL_STATE.userVotes));
+  }
+  if (!state.timelineDates || typeof state.timelineDates !== 'object') {
+    state.timelineDates = JSON.parse(JSON.stringify(INITIAL_STATE.timelineDates));
+  }
+
+  // Render application initially using cached local state to prevent visual hanging
+  renderApp();
+
   if (isFirebaseEnabled) {
     // 1. Listen for global settings (currentStage, finalists, timelineDates)
     db.collection('systemState').doc('global').onSnapshot(doc => {
