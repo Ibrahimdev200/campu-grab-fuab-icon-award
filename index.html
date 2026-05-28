@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Grab FUAB Student Awards 2026</title>
+  <meta name="description" content="Nominate and vote for your favorite campus icons in the Campus Grab FUAB Student Awards 2026. Check live results, prizes, and stage progress.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Glows for Premium Aesthetic -->
+  <div class="bg-glow bg-glow-purple"></div>
+  <div class="bg-glow bg-glow-gold"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <span class="logo-accent">CAMPUS</span>
+        <span class="logo-main">GRAB</span>
+        <span class="logo-badge">FUAB AWARDS 2026</span>
+      </div>
+      <div class="header-actions">
+        <button id="view-results-btn" class="btn btn-secondary" onclick="toggleResultsModal(true)">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Live Standings
+        </button>
+        <button id="admin-console-btn" class="btn btn-outline" onclick="openAdminModal()">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+          Admin Portal
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    
+    <!-- Step Progress Bar -->
+    <section class="progress-section card">
+      <div class="progress-bar-container">
+        <div class="progress-line">
+          <div id="progress-line-fill" class="progress-line-fill" style="width: 0%;"></div>
+        </div>
+        <div class="step-item active" id="step-1">
+          <div class="step-number">1</div>
+          <div class="step-label">Nominations</div>
+        </div>
+        <div class="step-item" id="step-2">
+          <div class="step-number">2</div>
+          <div class="step-label">Finalists</div>
+        </div>
+        <div class="step-item" id="step-3">
+          <div class="step-number">3</div>
+          <div class="step-label">Voting</div>
+        </div>
+      </div>
+      <div id="stage-badge-container" class="stage-badge-container">
+        <span id="current-stage-badge" class="badge badge-pulse">Stage 1: Public Nominations Open</span>
+      </div>
+    </section>
+
+    <!-- Timeline Widget -->
+    <section class="timeline-section card">
+      <h3 class="section-title-sm">Awards Timeline</h3>
+      <div class="timeline-grid">
+        <div class="timeline-item" id="tl-nominations">
+          <div class="timeline-dot"></div>
+          <div class="timeline-info">
+            <span class="tl-title">Nominations End</span>
+            <span class="tl-date">June 29</span>
+          </div>
+        </div>
+        <div class="timeline-item" id="tl-voting-start">
+          <div class="timeline-dot"></div>
+          <div class="timeline-info">
+            <span class="tl-title">Voting Starts</span>
+            <span class="tl-date">July 10</span>
+          </div>
+        </div>
+        <div class="timeline-item" id="tl-voting-end">
+          <div class="timeline-dot"></div>
+          <div class="timeline-info">
+            <span class="tl-title">Voting Ends</span>
+            <span class="tl-date">September 10</span>
+          </div>
+        </div>
+        <div class="timeline-item" id="tl-announcement">
+          <div class="timeline-dot highlight"></div>
+          <div class="timeline-info">
+            <span class="tl-title">Grand Finale</span>
+            <span class="tl-date">September 19</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Content Sections (Dynamically Managed by JS) -->
+    
+    <!-- Stage 1 View: Nominations -->
+    <section id="stage-nominations-view" class="stage-view active">
+      <div class="hero-section">
+        <h1>Nominate Your FUAB Campus Icons</h1>
+        <p class="hero-subtitle">Celebrate the outstanding individuals shaping the vibes and future of our campus. Finalists receive ₦5,000 and winners receive ₦50,000!</p>
+      </div>
+
+      <!-- How It Works Guide -->
+      <div class="card how-it-works-card">
+        <h2 class="guide-title">How The Awards Work</h2>
+        <div class="guide-steps-grid">
+          <div class="guide-step">
+            <div class="step-icon-wrap">
+              <svg class="step-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <div class="step-content">
+              <h3>1. Nominations (Free)</h3>
+              <p>Nominate colleagues or yourself. It's completely free! The <strong>top 2 most-nominated</strong> candidates in each category are chosen as finalists.</p>
+            </div>
+          </div>
+          
+          <div class="guide-step">
+            <div class="step-icon-wrap reward-icon">
+              <svg class="step-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+            </div>
+            <div class="step-content">
+              <h3>2. Finalist Stage (₦5,000)</h3>
+              <p>Every student selected as a finalist receives an immediate cash reward of <strong>₦5,000</strong>. There are exactly 2 finalists per category.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="step-icon-wrap vote-icon">
+              <svg class="step-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="step-content">
+              <h3>3. Final Voting (₦50,000)</h3>
+              <p>Voting opens on the finalists, merging gender categories (leaving 4 finalists in Best Vibe and 4 in Rising Star). Cast your vote to crown the category winner (₦50,000 cash prize)!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Tabs -->
+      <div class="categories-tabs">
+        <button class="tab-btn active" data-cat="best-vibe-male" onclick="switchCategoryTab('best-vibe-male')">Best Vibe (M)</button>
+        <button class="tab-btn" data-cat="best-vibe-female" onclick="switchCategoryTab('best-vibe-female')">Best Vibe (F)</button>
+        <button class="tab-btn" data-cat="rising-star-male" onclick="switchCategoryTab('rising-star-male')">Rising Star (M)</button>
+        <button class="tab-btn" data-cat="rising-star-female" onclick="switchCategoryTab('rising-star-female')">Rising Star (F)</button>
+      </div>
+
+      <!-- Active Category Details -->
+      <div id="active-category-details" class="card category-detail-card">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Nominations Split Layout: Form & List -->
+      <div class="nominations-layout">
+        <!-- Nomination Form Card -->
+        <div class="card form-card">
+          <h2 class="card-title">Nomination Form</h2>
+          <form id="nomination-form" onsubmit="handleNominateSubmit(event)">
+            
+            <div class="form-group">
+              <label for="nominee-name">Nominee Full Name</label>
+              <input type="text" id="nominee-name" placeholder="e.g. John Doe" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="nominee-dept">Department</label>
+              <input type="text" id="nominee-dept" placeholder="e.g. Computer Science" required>
+            </div>
+
+            <div class="form-group">
+              <label>Nominee's Gender</label>
+              <div class="gender-radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="nominee-gender" value="male" checked onclick="updateFormCategories('male')">
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="nominee-gender" value="female" onclick="updateFormCategories('female')">
+                  Female
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nominee-category-select">Award Category</label>
+              <select id="nominee-category-select" required onchange="handleFormCategoryChange()">
+                <option value="best-vibe-male">Best Vibe — Male</option>
+                <option value="rising-star-male">Rising Star — Male</option>
+              </select>
+            </div>
+            
+            <div class="prize-summary-box">
+              <div class="prize-item">
+                <span class="prize-label">Finalist Prize:</span>
+                <span class="prize-val">₦5,000</span>
+              </div>
+              <div class="prize-item">
+                <span class="prize-label">Winner Prize:</span>
+                <span class="prize-val">₦50,000</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit Nomination
+            </button>
+            <div id="nomination-feedback" class="form-feedback"></div>
+          </form>
+        </div>
+
+        <!-- Nomination List Card -->
+        <div class="card list-card">
+          <div class="list-card-header">
+            <h2 class="card-title">Current Nominations</h2>
+            <div class="search-box">
+              <input type="text" id="nomination-search" placeholder="Search nominees..." oninput="filterNominationList()">
+            </div>
+          </div>
+          <div class="nominations-scrollable-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Nominations</th>
+                </tr>
+              </thead>
+              <tbody id="nominations-table-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+            <div id="no-nominations-message" class="empty-state">
+              No nominations yet. Be the first to nominate!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stage 2 View: Finalist Selection (Admin Dashboard Inline) -->
+    <section id="stage-finalists-view" class="stage-view">
+      <div class="hero-section">
+        <h1>Finalist Selection</h1>
+        <p class="hero-subtitle">Review stage submissions and choose exactly 2 finalists per category to unlock public voting.</p>
+      </div>
+
+      <div class="admin-dashboard-container">
+        <!-- Progress Summary -->
+        <div class="card status-summary-card">
+          <h2 class="card-title">Selection Status</h2>
+          <div class="progress-indicator-grid">
+            <div class="prog-item" id="prog-badge-best-vibe-male">
+              <span class="prog-name">Best Vibe — Male</span>
+              <span class="prog-status">0 / 2 selected</span>
+              <div class="prog-mini-bar"><div class="fill" style="width: 0%"></div></div>
+            </div>
+            <div class="prog-item" id="prog-badge-best-vibe-female">
+              <span class="prog-name">Best Vibe — Female</span>
+              <span class="prog-status">0 / 2 selected</span>
+              <div class="prog-mini-bar"><div class="fill" style="width: 0%"></div></div>
+            </div>
+            <div class="prog-item" id="prog-badge-rising-star-male">
+              <span class="prog-name">Rising Star — Male</span>
+              <span class="prog-status">0 / 2 selected</span>
+              <div class="prog-mini-bar"><div class="fill" style="width: 0%"></div></div>
+            </div>
+            <div class="prog-item" id="prog-badge-rising-star-female">
+              <span class="prog-name">Rising Star — Female</span>
+              <span class="prog-status">0 / 2 selected</span>
+              <div class="prog-mini-bar"><div class="fill" style="width: 0%"></div></div>
+            </div>
+          </div>
+          
+          <div class="action-bar">
+            <button id="open-voting-btn" class="btn btn-success btn-large" disabled onclick="handleOpenVoting()">
+              Unlock Voting Stage (Stage 3)
+            </button>
+            <p id="voting-unlock-requirement" class="requirement-text">All 4 categories must have exactly 2 finalists selected to open voting.</p>
+          </div>
+        </div>
+
+        <!-- Category Finalist Selector Accordion -->
+        <div class="accordion-container">
+          <div class="accordion-item card" data-category="best-vibe-male">
+            <div class="accordion-header" onclick="toggleAccordion('best-vibe-male')">
+              <h3>Best Vibe — Male</h3>
+              <span class="accordion-badge">0/2 Selected</span>
+            </div>
+            <div class="accordion-content">
+              <p class="selector-desc">Select exactly 2 candidates below:</p>
+              <div class="nominees-selector-grid" id="select-grid-best-vibe-male">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item card" data-category="best-vibe-female">
+            <div class="accordion-header" onclick="toggleAccordion('best-vibe-female')">
+              <h3>Best Vibe — Female</h3>
+              <span class="accordion-badge">0/2 Selected</span>
+            </div>
+            <div class="accordion-content">
+              <p class="selector-desc">Select exactly 2 candidates below:</p>
+              <div class="nominees-selector-grid" id="select-grid-best-vibe-female">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item card" data-category="rising-star-male">
+            <div class="accordion-header" onclick="toggleAccordion('rising-star-male')">
+              <h3>Rising Star — Male</h3>
+              <span class="accordion-badge">0/2 Selected</span>
+            </div>
+            <div class="accordion-content">
+              <p class="selector-desc">Select exactly 2 candidates below:</p>
+              <div class="nominees-selector-grid" id="select-grid-rising-star-male">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item card" data-category="rising-star-female">
+            <div class="accordion-header" onclick="toggleAccordion('rising-star-female')">
+              <h3>Rising Star — Female</h3>
+              <span class="accordion-badge">0/2 Selected</span>
+            </div>
+            <div class="accordion-content">
+              <p class="selector-desc">Select exactly 2 candidates below:</p>
+              <div class="nominees-selector-grid" id="select-grid-rising-star-female">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stage 3 View: Voting Dashboard -->
+    <section id="stage-voting-view" class="stage-view">
+      <div class="hero-section">
+        <h1>Cast Your Vote</h1>
+        <p class="hero-subtitle">The finalists have been chosen! Cast your vote in each combined category (Best Vibe and Rising Star). You may change your vote at any time.</p>
+      </div>
+
+      <!-- Voting Cards Grid -->
+      <div class="voting-grid">
+        <!-- Best Vibe Combined Voting Card -->
+        <div class="card voting-category-card" id="vote-card-best-vibe">
+          <div class="voting-cat-header">
+            <h2>Best Vibe</h2>
+            <p class="desc">"This award celebrates the students (male & female) who bring the most positive energy, warmth, and unmatched vibes to campus."</p>
+          </div>
+          <div class="finalists-vote-container" id="vote-options-best-vibe">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Rising Star Combined Voting Card -->
+        <div class="card voting-category-card" id="vote-card-rising-star">
+          <div class="voting-cat-header">
+            <h2>Rising Star</h2>
+            <p class="desc">"This award celebrates the upcoming students (male & female) who are already making a big impact through talent, growth, and promise."</p>
+          </div>
+          <div class="finalists-vote-container" id="vote-options-rising-star">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Live Results Modal (Accessible at all times) -->
+  <div id="results-modal" class="modal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Live Standings & Results</h2>
+        <button class="close-btn" onclick="toggleResultsModal(false)">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="results-intro">Check out current vote counts and leaders across all categories. Finalists receive ₦5,000, and winners receive ₦50,000.</p>
+        <div id="results-charts-container" class="results-charts-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Authentication Modal -->
+  <div id="admin-auth-modal" class="modal">
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2>Admin Authentication</h2>
+        <button class="close-btn" onclick="closeAdminModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-auth-form" onsubmit="handleAdminLogin(event)">
+          <div class="form-group">
+            <label for="admin-passcode">Enter Admin Passcode</label>
+            <input type="password" id="admin-passcode" placeholder="Enter Admin Passcode" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Authenticate</button>
+          <div id="admin-auth-error" class="form-feedback error-text"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Panel Drawer (Only shows once authenticated) -->
+  <div id="admin-panel-drawer" class="drawer">
+    <div class="drawer-header">
+      <h2>Admin Control Center</h2>
+      <button class="close-btn" onclick="closeAdminPanel()">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <div class="drawer-section">
+        <h3>Stage Management</h3>
+        <p class="help-text">Manually transition the application stages. Closing a stage cannot be undone unless data is reset.</p>
+        
+        <div class="stage-transition-buttons">
+          <button id="admin-close-nominations-btn" class="btn btn-danger btn-block" onclick="adminCloseNominations()">
+            Lock Nominations & Enter Stage 2
+          </button>
+          <button id="admin-open-voting-btn" class="btn btn-success btn-block" disabled onclick="adminOpenVotingFromDrawer()">
+            Open Voting (Stage 3)
+          </button>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <h3>Configure Timeline</h3>
+        <form id="timeline-config-form" onsubmit="handleSaveTimeline(event)">
+          <div class="form-group">
+            <label for="conf-nom-end">Nomination End Date</label>
+            <input type="text" id="conf-nom-end" value="June 29" required>
+          </div>
+          <div class="form-group">
+            <label for="conf-vote-start">Voting Start Date</label>
+            <input type="text" id="conf-vote-start" value="July 10" required>
+          </div>
+          <div class="form-group">
+            <label for="conf-vote-end">Voting End Date</label>
+            <input type="text" id="conf-vote-end" value="September 10" required>
+          </div>
+          <div class="form-group">
+            <label for="conf-final">Grand Finale Date</label>
+            <input type="text" id="conf-final" value="September 19" required>
+          </div>
+          <button type="submit" class="btn btn-secondary btn-block">Update Timeline Dates</button>
+        </form>
+      </div>
+
+      <div class="drawer-section danger-zone">
+        <h3>System Actions</h3>
+        <p class="help-text">Clear all stored nominations, finalists, and votes to start the competition fresh.</p>
+        <button class="btn btn-outline-danger btn-block" onclick="adminResetData()">
+          Reset All System Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nomination Success Modal -->
+  <div id="nomination-success-modal" class="modal">
+    <div class="modal-content modal-small success-modal-content">
+      <div class="modal-header">
+        <h2>Nomination Submitted!</h2>
+        <button class="close-btn" onclick="toggleNominationSuccessModal(false)">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="success-icon-wrap">
+          <svg class="success-check-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <h3>Congratulations!</h3>
+        <p>Your nomination has been submitted successfully.</p>
+        <p class="giveaway-notice">Join our official WhatsApp group for giveaway updates, cash prizes, and to join the discussion!</p>
+        <a href="https://chat.whatsapp.com/EDP1up8Hmyn8mGFekC0Rbd?mlu=3&s=cl&p=a" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block" onclick="toggleNominationSuccessModal(false)">
+          <svg class="whatsapp-icon-inline" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor; vertical-align: middle; margin-right: 8px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.729-1.464L0 24zm6.59-4.846c1.6.95 3.167 1.485 4.814 1.486 5.45.004 9.885-4.425 9.888-9.879.002-2.643-1.013-5.124-2.86-6.973C16.63 1.94 14.15 1.002 11.5 1.002c-5.455 0-9.89 4.428-9.893 9.882-.001 1.83.493 3.618 1.43 5.216l-.993 3.626 3.714-.973zm12.39-5.117c-.3-.15-1.782-.88-2.062-.982-.28-.102-.483-.153-.687.153-.203.305-.788 1.002-.966 1.205-.178.203-.356.228-.656.078-1.122-.56-2.023-.97-2.82-1.652-.619-.53-1.037-1.18-1.16-1.38-.12-.204-.01-.314.09-.413.093-.092.203-.23.305-.344.102-.115.136-.192.204-.32.068-.127.034-.242-.017-.344-.05-.102-.483-1.168-.662-1.6-.174-.42-.37-.363-.507-.37-.13-.007-.28-.008-.43-.008-.15 0-.395.056-.6.28-.204.225-.78.762-.78 1.86 0 1.098.8 2.158.91 2.312.115.153 1.573 2.4 3.81 3.37.53.23 0 .422 1.626 1.047 1.03.398 1.765.418 2.378.326.685-.102 1.782-.728 2.03-1.43.25-.702.25-1.306.175-1.43-.075-.123-.275-.2-.575-.35z"/></svg>
+          Join Discussion Group / Giveaway
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Javascript File -->
+  <script src="app.js"></script>
+</body>
+</html>
