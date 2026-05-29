@@ -1766,5 +1766,28 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Expose event handlers to the global window object for HTML inline events
+window.toggleResultsModal = toggleResultsModal;
+window.openAdminModal = openAdminModal;
+window.closeAdminModal = closeAdminModal;
+window.handleAdminLogin = handleAdminLogin;
+window.openAdminPanel = openAdminPanel;
+window.closeAdminPanel = closeAdminPanel;
+window.adminCloseNominations = adminCloseNominations;
+window.adminOpenVotingFromDrawer = adminOpenVotingFromDrawer;
+window.handleSaveTimeline = handleSaveTimeline;
+window.adminResetData = adminResetData;
+window.switchCategoryTab = switchCategoryTab;
+window.updateFormCategories = updateFormCategories;
+window.handleFormCategoryChange = handleFormCategoryChange;
+window.filterNominationList = filterNominationList;
+window.handleNominateSubmit = handleNominateSubmit;
+window.toggleNominationSuccessModal = toggleNominationSuccessModal;
+window.toggleAccordion = toggleAccordion;
+window.toggleFinalistSelection = toggleFinalistSelection;
+window.handleOpenVoting = handleOpenVoting;
+window.handleVote = handleVote;
+
 // Window listener initialization
 window.addEventListener('DOMContentLoaded', initApp);
+
