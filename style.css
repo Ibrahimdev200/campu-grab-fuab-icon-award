@@ -2056,6 +2056,48 @@ select:focus {
   text-align: center;
 }
 
+/* ==========================================================================
+   APP FOOTER
+   ========================================================================== */
+.app-footer {
+  background: rgba(10, 10, 14, 0.5);
+  border-top: 1px solid var(--border-color);
+  padding: 2.5rem 0;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.footer-disclaimer {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+.footer-disclaimer strong {
+  color: var(--text-secondary);
+}
+
+.footer-bottom {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.25rem;
+  width: 100%;
+}
+
+
 
 
 
